@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6c55d9">
+<title>StudyMate AI — Study smarter, one step at a time</title>
+<style>
+:root{--ink:#24213b;--muted:#6f6b86;--purple:#6c55d9;--purple2:#eeeaff;--bg:#f7f6fc;--card:#fff;--line:#e8e5f3;--green:#27856c;--amber:#a96b15}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 15px;font-weight:700;background:var(--purple);color:white}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b8adff;outline-offset:2px}
+button.secondary{background:#f0eef9;color:var(--ink)}button.ghost{background:transparent;color:var(--purple);padding:8px}
+.topbar{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100% - 1180px)/2));background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.5px}.logo{display:grid;place-items:center;width:38px;height:38px;background:var(--purple);color:#fff;border-radius:13px;font-size:19px}.brand small{display:block;font-size:11px;color:var(--muted);letter-spacing:0;font-weight:600}
+.top-right{font-size:13px;color:var(--muted)}main{max-width:1180px;margin:28px auto;padding:0 20px}.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:20px;margin-bottom:20px}.hero-copy,.hero-side,.panel,.stat{background:var(--card);border:1px solid var(--line);border-radius:22px}.hero-copy{padding:28px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--purple);font-weight:800}.hero h1{font-size:clamp(27px,4vw,42px);line-height:1.08;letter-spacing:-1.4px;margin:12px 0}.hero p{color:var(--muted);line-height:1.6;max-width:650px}.hero-side{padding:22px;background:linear-gradient(150deg,#eeeaff,#fff 75%);display:flex;flex-direction:column;justify-content:space-between;min-height:220px}.circle{width:58px;height:58px;border-radius:18px;background:#fff;display:grid;place-items:center;font-size:27px;box-shadow:0 8px 20px #3d2c8312}.hero-side strong{font-size:20px}.hero-side p{font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat{padding:17px 20px}.stat .num{font-size:27px;font-weight:850;letter-spacing:-1px}.stat .label{font-size:12px;color:var(--muted);margin-top:4px}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}.panel{padding:22px;margin-bottom:20px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.panel h2{font-size:18px;margin:0;letter-spacing:-.3px}.sub{font-size:12px;color:var(--muted);margin-top:5px}.field{display:flex;flex-direction:column;gap:7px;margin:13px 0}.field label{font-size:12px;font-weight:800;color:#514c70}.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff;color:var(--ink);width:100%}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.task-list,.quiz-list{display:flex;flex-direction:column;gap:10px}.task{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;padding:12px}.task input{margin-top:4px;accent-color:var(--purple);width:17px;height:17px}.task-title{font-weight:750;font-size:13px}.task-meta{font-size:11px;color:var(--muted);margin-top:4px}.task.done .task-title{text-decoration:line-through;color:#8d89a2}.tag{display:inline-block;border-radius:99px;padding:5px 8px;background:var(--purple2);color:var(--purple);font-size:10px;font-weight:800}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;font-size:13px}
+.chat{background:#fbfaff;border:1px solid var(--line);border-radius:15px;padding:14px;min-height:205px;max-height:300px;overflow:auto}.bubble{padding:11px 13px;border-radius:14px;line-height:1.5;font-size:13px;max-width:94%;margin:0 0 10px;white-space:pre-wrap}.bubble.bot{background:#fff;border:1px solid var(--line);border-top-left-radius:4px}.bubble.user{background:var(--purple);color:#fff;margin-left:auto;border-top-right-radius:4px}.chat-form{display:flex;gap:8px;margin-top:10px}.chat-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:12px;padding:12px}.quick{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.quick button{font-size:11px;padding:8px 10px}.note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}.quiz-q{font-weight:800;font-size:14px;line-height:1.45;margin-bottom:12px}.option{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--line);margin:7px 0;font-weight:600}.option.selected{border-color:var(--purple);background:var(--purple2)}.option.correct{border-color:#8fd2bc;background:#eaf8f3}.feedback{font-size:12px;line-height:1.5;margin-top:10px;color:var(--muted)}.progressbar{height:9px;background:#efedf7;border-radius:99px;overflow:hidden;margin-top:10px}.progressbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#6c55d9,#a69aff);transition:width .25s}.footer{text-align:center;color:var(--muted);font-size:11px;padding:14px 0 35px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#28233e;color:white;border-radius:12px;padding:12px 16px;font-size:13px;display:none;z-index:10}
+@media(max-width:800px){.hero,.layout{grid-template-columns:1fr}.hero-side{min-height:170px}.stats{gap:8px}.stat{padding:13px}.stat .num{font-size:22px}.topbar{padding:0 16px}.top-right{display:none}main{margin-top:18px;padding:0 13px}.hero-copy{padding:22px}.panel{padding:17px}.two{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="logo">S</div><div>StudyMate AI<small>YOUR PERSONAL STUDY COMPANION</small></div></div>
+  <div class="top-right">A small step today is progress ✨</div>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Plan • Practise • Progress</div>
+      <h1>Make your next study session count.</h1>
+      <p>Turn a big syllabus into manageable steps. Build a revision plan, practise a quick quiz, and keep track of what you've finished — all in one place.</p>
+      <button id="makePlanBtn">Create my study plan →</button>
+    </div>
+    <aside class="hero-side">
+      <div class="circle">✦</div>
+      <div><strong>Your learning, organised.</strong><p>Start with one subject. Adjust your plan as you learn.</p><span class="tag">DEMO PROTOTYPE</span></div>
+    </aside>
+  </section>
+  <section class="stats">
+    <div class="stat"><div class="num" id="subjectCount">0</div><div class="label">Subjects added</div></div>
+    <div class="stat"><div class="num" id="taskCount">0</div><div class="label">Study tasks</div></div>
+    <div class="stat"><div class="num" id="progressCount">0%</div><div class="label">Tasks completed</div><div class="progressbar"><span id="progressBar"></span></div></div>
+  </section>
+  <div class="layout">
+    <div>
+      <section class="panel" id="planner">
+        <div class="panel-head"><div><h2>Build a revision plan</h2><div class="sub">Tell us what you're studying today.</div></div><span class="tag">01 · PLAN</span></div>
+        <form id="planForm">
+          <div class="field"><label for="subject">Subject</label><input id="subject" required maxlength="70" placeholder="e.g. Operating Systems"></div>
+          <div class="field"><label for="topics">Topics (separate with commas)</label><input id="topics" required maxlength="300" placeholder="e.g. Memory management, File systems"></div>
+          <div class="two">
+            <div class="field"><label for="minutes">Study time</label><select id="minutes"><option value="25">25 minutes</option><option value="45" selected>45 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></div>
+            <div class="field"><label for="examDate">Exam date (optional)</label><input id="examDate" type="date"></div>
+          </div>
+          <button type="submit">Generate plan</button>
+        </form>
+        <div class="note">This prototype creates a suggested plan locally in your browser. It does not send your study information to a server.</div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><h2>Today's study tasks</h2><div class="sub">Tick a task when you've completed it.</div></div><span class="tag">02 · TRACK</span></div>
+        <div id="taskList" class="task-list"><div class="empty">Your study tasks will appear here after you create a plan.</div></div>
+        <div class="field"><label for="manualTask">Add another task</label><div class="chat-form"><input id="manualTask" placeholder="e.g. Revise process scheduling"><button id="addTaskBtn" type="button">Add</button></div></div>
+      </section>
+    </div>
+    <div>
+      <section class="panel">
+        <div class="panel-head"><div><h2>Study companion</h2><div class="sub">Try a study workflow or ask a question.</div></div><span class="tag">03 · ASSIST</span></div>
+        <div class="chat" id="chat" aria-live="polite">
+          <div class="bubble bot">Hi! I'm your StudyMate demo assistant. I can help organise a revision session, suggest a quiz, or explain how to use this planner. Try one of the prompts below.</div>
+        </div>
+        <div class="quick">
+          <button class="secondary quickBtn" data-prompt="Make a revision plan">Make a revision plan</button>
+          <button class="secondary quickBtn" data-prompt="Quiz me">Quiz me</button>
+          <button class="secondary quickBtn" data-prompt="Help me focus">Help me focus</button>
+        </div>
+        <form id="chatForm" class="chat-form"><input id="chatInput" aria-label="Ask StudyMate" placeholder="Ask about your study plan…" maxlength="250"><button type="submit">Send</button></form>
+        <div class="note">Demo disclosure: assistant replies are rule-based examples, not generated by a live AI model. This is a simulated assistant experience, not an actual Alexa+ integration.</div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><h2>Quick practice</h2><div class="sub">Answer a sample question and read the explanation.</div></div><span class="tag">04 · PRACTISE</span></div>
+        <div id="quizArea"></div>
+        <button class="secondary" id="nextQuiz" style="margin-top:12px">Another question ↗</button>
+      </section>
+    </div>
+  </div>
+  <div class="footer">StudyMate AI · Student-built demo prototype · Progress is saved in this browser on this device.</div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $ = id => document.getElementById(id);
+const KEY = "studymate-ai-v1";
+const questions = [
+ {q:"Which technique allows multiple processes to share CPU time?", options:["Time-sharing","Defragmentation","Formatting"], answer:0, explain:"Time-sharing divides CPU time into small intervals so multiple processes can make progress."},
+ {q:"Which SQL command retrieves data from a table?", options:["UPDATE","SELECT","DROP"], answer:1, explain:"SELECT retrieves rows and columns from one or more database tables."},
+ {q:"What is the main purpose of a primary key?", options:["To uniquely identify each row","To colour a table","To sort files alphabetically"], answer:0, explain:"A primary key uniquely identifies each record and cannot contain duplicate or NULL values."},
+ {q:"Which HTML element creates a hyperlink?", options:["<link>","<a>","<href>"], answer:1, explain:"The anchor element <a> creates a hyperlink, usually with an href attribute."}
+];
+let state = {tasks:[], subjects:[], qIndex:0, selected:null};
+try { const saved = JSON.parse(localStorage.getItem(KEY)||"null"); if(saved && Array.isArray(saved.tasks)) state = {...state,...saved}; } catch(e){}
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){} renderTasks(); renderStats(); }
+function toast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
+function renderStats(){
+ $("subjectCount").textContent = new Set(state.subjects).size;
+ $("taskCount").textContent = state.tasks.length;
+ const done=state.tasks.filter(t=>t.done).length, pct=state.tasks.length?Math.round(done/state.tasks.length*100):0;
+ $("progressCount").textContent=pct+"%"; $("progressBar").style.width=pct+"%";
+}
+function renderTasks(){
+ const box=$("taskList"); box.innerHTML="";
+ if(!state.tasks.length){box.innerHTML='<div class="empty">Your study tasks will appear here after you create a plan.</div>';return;}
+ state.tasks.forEach(task=>{
+  const row=document.createElement("div");row.className="task"+(task.done?" done":"");
+  const cb=document.createElement("input");cb.type="checkbox";cb.checked=task.done;cb.setAttribute("aria-label","Mark task complete");cb.addEventListener("change",()=>{task.done=cb.checked;save();});
+  const content=document.createElement("div");content.style.flex="1";
+  const title=document.createElement("div");title.className="task-title";title.textContent=task.title;
+  const meta=document.createElement("div");meta.className="task-meta";meta.textContent=task.subject+" · "+task.duration+" min";
+  content.append(title,meta);row.append(cb,content);box.append(row);
+ });
+}
+function addBubble(text,who="bot"){const b=document.createElement("div");b.className="bubble "+who;b.textContent=text;$("chat").append(b);$("chat").scrollTop=$("chat").scrollHeight;}
+function makePlan(subject, topics, minutes){
+ const parts=topics.split(",").map(x=>x.trim()).filter(Boolean).slice(0,12);
+ if(!parts.length) return false;
+ const each=Math.max(5,Math.floor(minutes/parts.length));
+ if(!state.subjects.includes(subject))state.subjects.push(subject);
+ const additions=parts.map((topic,i)=>({title:(i===0?"Review: ":"Practise: ")+topic,subject,duration:each,done:false}));
+ state.tasks.push(...additions);
+ save();
+ addBubble("I've drafted a "+minutes+"-minute revision session for "+subject+". Start with the first topic, take a short pause between tasks, and tick each task when complete. This is a suggested plan you can adjust.");
+ toast("Study plan created");
+ return true;
+}
+$("planForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const subject=$("subject").value.trim(), topics=$("topics").value, minutes=Number($("minutes").value);
+ if(!subject||!topics.trim())return;
+ if(makePlan(subject,topics,minutes)){ $("planner").scrollIntoView({behavior:"smooth",block:"start"}); }
+});
+$("makePlanBtn").addEventListener("click",()=>{$("planner").scrollIntoView({behavior:"smooth",block:"start"});$("subject").focus();});
+$("addTaskBtn").addEventListener("click",()=>{
+ const value=$("manualTask").value.trim();if(!value){toast("Enter a task first");return;}
+ const subject=state.subjects[state.subjects.length-1]||"Personal study";
+ state.tasks.push({title:value,subject,duration:15,done:false});$("manualTask").value="";save();toast("Task added");
+});
+function assistantReply(msg){
+ const s=msg.toLowerCase();
+ if(s.includes("quiz"))return "Let's practise! Try the Quick Practice card below. Read the explanation after choosing an answer, then use the next-question button to continue.";
+ if(s.includes("plan")||s.includes("revision"))return state.tasks.length?"Your plan has "+state.tasks.length+" tasks, and "+state.tasks.filter(t=>t.done).length+" are complete. Focus on the next unchecked task. You can add topics in Build a revision plan.":"Start by entering a subject and comma-separated topics in Build a revision plan. Choose a study duration and press Generate plan.";
+ if(s.includes("focus")||s.includes("concentrat"))return "Try a small focus sprint: choose one task, silence non-essential notifications, study for 20–25 minutes, then take a short break. Keep the goal realistic and adjust it to your needs.";
+ if(s.includes("explain")||s.includes("what is"))return "Tell me the exact subject and topic you'd like help with. This prototype uses sample responses, so it cannot yet explain arbitrary topics with live AI. You can still practise with the sample quiz.";
+ if(s.includes("progress"))return "You've completed "+state.tasks.filter(t=>t.done).length+" out of "+state.tasks.length+" tasks. Your progress is saved in this browser on this device.";
+ return "Thanks for asking! I'm a demo assistant at this stage. I can help you create a revision plan, suggest a focus routine, or direct you to the sample quiz. For topic-specific answers, a real AI service would need to be integrated and tested.";
+}
+$("chatForm").addEventListener("submit",e=>{e.preventDefault();const v=$("chatInput").value.trim();if(!v)return;addBubble(v,"user");$("chatInput").value="";setTimeout(()=>addBubble(assistantReply(v)),120);});
+document.querySelectorAll(".quickBtn").forEach(b=>b.addEventListener("click",()=>{addBubble(b.dataset.prompt,"user");setTimeout(()=>addBubble(assistantReply(b.dataset.prompt)),120);}));
+function renderQuiz(){
+ const q=questions[state.qIndex%questions.length];state.selected=null;
+ const area=$("quizArea");area.innerHTML="";
+ const title=document.createElement("div");title.className="quiz-q";title.textContent=q.q;area.append(title);
+ const opts=document.createElement("div");
+ q.options.forEach((opt,i)=>{const b=document.createElement("button");b.className="option";b.textContent=opt;b.addEventListener("click",()=>{
+  if(state.selected!==null)return;state.selected=i;
+  [...opts.children].forEach((el,j)=>{el.disabled=true;if(j===q.answer)el.classList.add("correct");if(j===i&&i!==q.answer)el.classList.add("selected");});
+  const f=document.createElement("div");f.className="feedback";f.textContent=(i===q.answer?"Correct! ":"Not quite. ")+q.explain;area.append(f);
+ });opts.append(b);});area.append(opts);
+}
+$("nextQuiz").addEventListener("click",()=>{state.qIndex=(state.qIndex+1)%questions.length;renderQuiz();});
+renderTasks();renderStats();renderQuiz();
+</script>
+</body>
+</html>
